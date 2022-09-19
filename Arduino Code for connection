@@ -1,0 +1,101 @@
+#include <DHT.h>
+#include <DHT_U.h>
+
+#define VCC2 12
+#define GND2 11
+#define VCC3 8
+#define GND3 4
+#define ManualPin 9
+#include <SimpleDHT.h>
+int pinDHT11 = 2;
+SimpleDHT11 dht11(pinDHT11);
+int msensor = A1; // moisture sensor is connected with the analog pin A1 of the Arduino
+int msvalue = 0; // moisture sensor value
+boolean flag1 = false;
+int MotorPin = 9;
+int Manualpin =13;
+int state1 = 0;
+int state2=0;
+int flag = 0;
+ 
+void setup()
+{
+ pinMode( VCC2,OUTPUT);
+ digitalWrite(VCC2,HIGH);
+ pinMode(GND2,OUTPUT);
+ digitalWrite(GND2,LOW);
+ pinMode( VCC3,OUTPUT);
+ digitalWrite(VCC3,HIGH);
+ pinMode(GND3,OUTPUT);
+ digitalWrite(GND3,LOW);
+ pinMode(MotorPin, OUTPUT);
+ digitalWrite(MotorPin, LOW);
+ pinMode(ManualPin, OUTPUT);
+ digitalWrite(ManualPin, LOW);
+ Serial.begin(9600);
+ Serial.begin(9600);
+ pinMode(msensor, INPUT);  
+}
+
+void loop()
+{
+  if(Serial.available())
+  {
+    state1 = Serial.read();
+    byte temperature = 0;
+  byte humidity = 0;
+  int err = SimpleDHTErrSuccess;
+  if ((err = dht11.read(&temperature, &humidity, NULL)) != SimpleDHTErrSuccess)
+  {
+    Serial.print("Read DHT11 failed, err=");
+    Serial.print(SimpleDHTErrCode(err));
+    Serial.print(",");
+    Serial.println(SimpleDHTErrDuration(err));
+    delay(1000);
+    return;
+  }
+  Serial.print((int)temperature);
+  Serial.print("°C,");
+  Serial.print((int)humidity);
+  Serial.print(" %");
+  delay(1500);
+ 
+  msvalue = analogRead(msensor);
+  Serial.print(msvalue);
+  Serial.print(",");
+  if ( (msvalue >= 500) && ( flag1 == false ) )
+{
+  digitalWrite(9, HIGH);
+  flag1 = true;
+  delay(1000);
+}
+if ((msvalue  <= 300  ) && ( flag1 == true ) )
+{
+  digitalWrite(9, LOW);
+  flag1 = false;
+  delay(1000);
+}
+delay(1000);
+if(Serial.available() > 0)
+ {
+ state2 = Serial.read();
+ flag=0;
+ }
+ if (state2== '0')
+ {
+ digitalWrite(13, LOW);
+ if(flag == 0)
+ {
+  flag = 1;
+ }
+}
+else if (state2 == '1')
+{
+digitalWrite(13, HIGH);
+if(flag == 0)
+{
+flag = 1;
+}
+}
+  }
+}
