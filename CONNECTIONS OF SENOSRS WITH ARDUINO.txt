@@ -1,0 +1,40 @@
+                                                  PS:  EFFECTIVE WATER MANAGEMENT FOR SMART FARMING
+                                                       
+                                                             LAST UPDATED ON: 17/09/2021
+
+1) Conection of Soil Moisture sensor to Arduino UNO r3
+   1) VCC(SOIL MOISTURE) TO 3.3V OF(ARDUINO) 
+   2) GND(SOIL MOISTURE) TO DIGITAL PIN 11 [GND] OF ARDUINO------->***EXTENDED GND***<--------  
+   3) DO (SOIL MOISTURE) TO A1 OF(ARDUINO)  
+
+2) Connection of DHT11 humidity and temperature sensor with Arduino UNO r3
+   1) -VE OF DHT11 TO GND OF ARDUINO
+   2) CENTER PIN OF DHT11 TO DIGITAL PIN 2 OF ARDUINO
+   3) +VE OF DHT11 TO Vin[5v] OF ARDUIINO 
+
+  
+3) Connection Of Bluetooth(BT04) to Arduino UNO r3
+   1) RX OF BT04 TO TX OF ARDUINO  ------>******** SHOULD BE CONNECTED ONLY AFTER UPLOADING THE CODE********<----
+   2) TX OF BT04 TO RX OF ARDUINO  -----> ******* SHOULD BE CONNECTED ONLY AFTER UPLOADING THE  CODE *********<-----
+   3) GND OF BTO4 TO GND OF ARDUINO
+   4) VCC OF BT04 TO 5V OF ARDUIN0
+  
+4) Connection of relay module (AUTOMATIC) to Arduino
+   1) VCC OF RELAY TO DIGITAL PIN 12 [VCC2] OF ARDUINO -------> ***EXTENDED 5V***<---------
+   2) GND OF RELAY TO GND OF ARDUINO
+   3) INPUT OF RELAY TO DIGITAL PIN 13 OF ARDUINO 
+
+5) Connection of relay module2 (MANUAL) TO Arduino
+   1) VCC OF RELAY TO DIGIAL PIN 8 [VCC3] OF ARDUINO ---->****EXTENDED 5V***** <----
+   2) GND OF RELAY TO DIGITAL PIN 4[GND3] OF ARDUINO ---->****EXTENDED GND**** <----sss
+   3) INPUT OF RELAY TO DIGITAL PIN 9 OF ARDUINO 
+
+
+Materials Required are
+*Arduino UNO r3
+*DHT11 Humidity and Temperature sensor
+*Soil moisture Sensor
+*Bluetooth Module (BT04)
+*Relay Module -5v
+*Solenoid DC water Valve - 12v
+*Jumper Wires
